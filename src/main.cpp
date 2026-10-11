@@ -4,74 +4,182 @@ using namespace std;
 
 class Pokemon
 {
-public:
-    string name = "Unknown";
-    int pokedexNumber = 0;
-    int level = 5;
-    int health = 100;
-    int attack = 10;
-    int defense = 10;
+private:
+    string name{"Unknown"};
+    int pokedexNumber{0};
+    int level{5};
+    int health{100};
+    int attack{10};
+    int defense{10};
 
-    void displayInfo()
+public:
+    // Getters
+
+    string getName()
     {
-        cout << "\n=== " << name << " ===" << endl;
-        cout << " Pokedex Number: " << pokedexNumber << endl;
-        cout << " Level: " << level << endl;
-        cout << " Health: " << health << endl;
-        cout << " Attack: " << attack << endl;
-        cout << " Defense: " << defense << "\n"
-             << endl;
+        return name;
     }
 
-    void takeDamage(int damage)
+    int getPokedexNumber()
     {
-        if (damage > health)
+        return pokedexNumber;
+    }
+
+    int getLevel()
+    {
+        return level;
+    }
+
+    int getHealth()
+    {
+        return health;
+    }
+
+    int getAttack()
+    {
+        return attack;
+    }
+
+    int getDefense()
+    {
+        return defense;
+    }
+
+    // Setters
+
+    void setName(string incomingName)
+    {
+        if (incomingName == "")
         {
-            health = 0;
-            cout << name << " takes " << damage << " damage!" << endl;
-        }
-        else if (damage < 0)
-        {
-            cout << "Damage cannot be a negative value" << endl;
+            cout << "Name cannot be empty." << endl;
         }
         else
         {
-            health -= damage;
-            cout << name << " takes " << damage << " damage!" << endl;
+            name = incomingName;
         }
+    }
+
+    void setPokedexNumber(int incomingPokedexNumber)
+    {
+        if (incomingPokedexNumber < 1 || incomingPokedexNumber > 151)
+        {
+            cout << "Pokedex number must be between 1 and 151." << endl;
+        }
+        else
+        {
+            pokedexNumber = incomingPokedexNumber;
+        }
+    }
+
+    void setLevel(int incomingLevel)
+    {
+        if (incomingLevel < 1 || incomingLevel > 100)
+        {
+            cout << "Level must be between 1 and 100." << endl;
+        }
+        else
+        {
+            level = incomingLevel;
+        }
+    }
+
+    void setHealth(int incomingHealth)
+    {
+        if (incomingHealth < 0 || incomingHealth > 100)
+        {
+            cout << "Health must be between 0 and 100." << endl;
+        }
+        else
+        {
+            health = incomingHealth;
+        }
+    }
+
+    void setAttack(int incomingAttack)
+    {
+        if (incomingAttack < 1)
+        {
+            cout << "Attack must be greater than 0." << endl;
+        }
+        else
+        {
+            attack = incomingAttack;
+        }
+    }
+
+    void setDefense(int incomingDefense)
+    {
+        if (incomingDefense < 1)
+        {
+            cout << "Defense must be greater than 0." << endl;
+        }
+        else
+        {
+            defense = incomingDefense;
+        }
+    }
+
+    void takeDamage(int incomingDamage)
+    {
+        if (incomingDamage < 0)
+        {
+            cout << "Damage cannot be a negative value" << endl;
+            return;
+        }
+        else if (incomingDamage > health)
+        {
+            setHealth(0);
+        }
+        else
+        {
+            int remainingHealth = getHealth() - incomingDamage;
+            setHealth(remainingHealth);
+        }
+
+        cout << name << " takes " << incomingDamage << " damage!" << endl;
+    }
+
+    void displayInfo()
+    {
+        cout << "\n=== " << getName() << " ===" << endl;
+        cout << " Pokedex Number: " << getPokedexNumber() << endl;
+        cout << " Level: " << getLevel() << endl;
+        cout << " Health: " << getHealth() << endl;
+        cout << " Attack: " << getAttack() << endl;
+        cout << " Defense: " << getDefense() << "\n"
+             << endl;
     }
 };
 
 int main()
 {
     Pokemon Bulbasaur;
-    Bulbasaur.name = "Bulbasaur";
-    Bulbasaur.pokedexNumber = 1;
-    Bulbasaur.level = 5;
-    Bulbasaur.health = 100;
-    Bulbasaur.attack = 14;
-    Bulbasaur.defense = 25;
+    Bulbasaur.setName("Bulbasaur");
+    Bulbasaur.setPokedexNumber(1);
+    Bulbasaur.setLevel(5);
+    Bulbasaur.setHealth(100);
+    Bulbasaur.setAttack(14);
+    Bulbasaur.setDefense(25);
 
     Pokemon Charmander;
-    Charmander.name = "Charmander";
-    Charmander.pokedexNumber = 4;
-    Charmander.level = 5;
-    Charmander.health = 26;
-    Charmander.attack = 14;
-    Charmander.defense = 10;
+    Charmander.setName("Charmander");
+    Charmander.setPokedexNumber(4);
+    Charmander.setLevel(5);
+    Charmander.setHealth(26);
+    Charmander.setAttack(14);
+    Charmander.setDefense(10);
 
     Pokemon Squirtle;
-    Squirtle.name = "Squirtle";
-    Squirtle.pokedexNumber = 7;
-    Squirtle.level = 5;
-    Squirtle.health = 100;
-    Squirtle.attack = 25;
-    Squirtle.defense = 10;
+    Squirtle.setName("Squirtle");
+    Squirtle.setPokedexNumber(7);
+    Squirtle.setLevel(5);
+    Squirtle.setHealth(100);
+    Squirtle.setAttack(25);
+    Squirtle.setDefense(10);
 
-    Charmander.displayInfo();
-    Charmander.takeDamage(100);
-    Charmander.displayInfo();
+
 
     Bulbasaur.displayInfo();
+    Charmander.displayInfo();
     Squirtle.displayInfo();
 }
